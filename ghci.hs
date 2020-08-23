@@ -18,3 +18,17 @@ capital ::String -> String
 capital "" = "Empty"
 capital all@(x:xs) = "First letter of" ++ all ++ "is" ++ [x]
 
+bmiTell :: (RealFloat a, Show a) => a -> a -> String
+bmiTell weight height
+    | bmi <= skinny = "BMI: " ++ show bmi ++ "Boney"
+    | bmi <= normal = "BMI: " ++ show bmi ++ "Normal"
+    | bmi <= fat = "BMI: " ++ show bmi ++ "Obese"
+    | otherwise = "BMI: " ++ show (weight/height^2) ++ "Too BIG"
+    where bmi = weight / height ^ 2
+          skinny = 18.5
+          normal = 25.0
+          fat = 30.0
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
+calcBmis xs = [bmi w h | (w, h) <- xs]  
+    where bmi weight height = weight / height ^ 2  
