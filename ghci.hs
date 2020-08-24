@@ -32,3 +32,30 @@ bmiTell weight height
 calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
 calcBmis xs = [bmi w h | (w, h) <- xs]  
     where bmi weight height = weight / height ^ 2  
+
+calcBmis2 :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis2 xs = [bmi | (w, h) <- xs, let bmi = w*h^2]
+
+cylinder :: (RealFloat a) => a -> a -> a  
+cylinder r h = 
+    let sideArea = 2 * pi * r * h  
+        topArea = pi * r ^2  
+    in  sideArea + 2 * topArea  
+
+maximum' ::(Ord a) => [a] -> a
+maximum' [] = error "empty list"
+maximum' [x] = x
+maximum' (x:xs)
+    | x > maxTail = x
+    | otherwise = maxTail
+    where maxTail = maximum' xs  
+
+maximum'2 ::(Ord a) => [a] -> a
+maximum'2 [] = error "empty list"
+maximum'2 [x] = x
+maximum'2 (x:xs) = max x (maximum'2 xs)
+
+replicate' ::(Num i, Ord i) => i -> a -> [a]
+replicate' n x
+    | n<=0 = []
+    | otherwise = x:replicate' (n-1) x
