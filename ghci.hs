@@ -59,3 +59,16 @@ replicate' ::(Num i, Ord i) => i -> a -> [a]
 replicate' n x
     | n<=0 = []
     | otherwise = x:replicate' (n-1) x
+
+take' ::(Num i, Ord i, Eq a) => i -> [a] -> [a]
+take' n x
+    | n<=0 = []
+    | x==[] = []
+take' n (x:xs) = x : take' (n-1) xs  
+
+quicksort ::(Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs)=
+    let smallerNum = quicksort [a | a<-xs, a<=x]
+        biggerNum = quicksort [a | a<-xs, a>x]
+    in smallerNum ++ [x] ++ biggerNum
