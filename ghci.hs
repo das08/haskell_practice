@@ -72,3 +72,20 @@ quicksort (x:xs)=
     let smallerNum = quicksort [a | a<-xs, a<=x]
         biggerNum = quicksort [a | a<-xs, a>x]
     in smallerNum ++ [x] ++ biggerNum
+
+multThree :: (Num a) => a -> a -> a -> a  
+multThree x y z = x * y * z  
+
+div10 ::(Floating a) => a -> a
+div10 = (/10)
+
+isDigit ::(Num a,Enum a,Eq a) => a -> Bool
+isDigit = (`elem` [1..9])
+
+applyTwice :: (a -> a) -> a -> a  
+applyTwice f x = f (f x)  
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]  
+zipWith' _ [] _ = []  
+zipWith' _ _ [] = []  
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys  
