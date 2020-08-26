@@ -114,3 +114,12 @@ sum2 = foldl (+) 0
 
 elem' ::(Eq a) => a -> [a] -> Bool
 elem' x = foldl (\acc a -> if a==x then True else acc) False
+
+map' ::(a -> b) -> [a] -> [b]
+map' f xs = foldr (\x acc -> f x:acc) [] xs
+
+maximum3 ::(Ord a) => [a] -> a
+maximum3 = foldl1 (\acc x -> if x>acc then x else acc)
+
+head' :: [a] -> a  
+head' = foldr1 (\x _ -> x)  
