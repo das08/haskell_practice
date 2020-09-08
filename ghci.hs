@@ -123,3 +123,12 @@ maximum3 = foldl1 (\acc x -> if x>acc then x else acc)
 
 head' :: [a] -> a  
 head' = foldr1 (\x _ -> x)  
+
+
+halve :: [a] -> ([a],[a])
+halve x = (a, b)
+    where
+        listLen = length x
+        a =　take (div listLen 2) x
+        b = drop (div listLen 2) x
+

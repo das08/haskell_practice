@@ -1,6 +1,31 @@
-data Point = Point Float Float deriving (Show)
-data Shape = Circle Point Float | Rectangle Point Point deriving (Show)  
+import qualified Data.Map as Map
+data Person = Person {
+    firstName :: String,
+    lastaName :: String,
+    age :: Int,
+    height :: Float,
+    phoneNumber :: String,
+    flavor :: String
+} deriving (Show,Eq)
 
-surface :: Shape -> Float  
-surface (Circle _ r) = pi * r ^ 2  
-surface (Rectangle (Point x1 y1) (Point x2 y2)) = (abs $ x2 - x1) * (abs $ y2 - y1)
+data LockerState = Taken | Free deriving (Show, Eq)
+type Code = String
+type LockerMap = Map.Map Int (LockerState, Code)
+
+lockerLoockup :: Int -> LockerMap -> Either String Code
+lockerLoockup lockerNumber map=
+    case Map.lookup lockerNumber map of
+        Nothing -> Left $ "Locker number " ++ show lockerNumber ++ " doesn't exist!" 
+        Just (state, code) -> if state /= Taken
+                                then Right code
+                                else Left $ "Locker " ++ show lockerNumber ++ " is already taken!" 
+
+lockers :: LockerMap  
+lockers = Map.fromList   
+    [(100,(Taken,"ZD39I"))  
+    ,(101,(Free,"JAH3I"))  
+    ,(103,(Free,"IQSA9"))  
+    ,(105,(Free,"QOTSA"))  
+    ,(109,(Taken,"893JJ"))  
+    ,(110,(Taken,"99292"))  
+    ] 
