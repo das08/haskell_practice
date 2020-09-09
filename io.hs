@@ -1,4 +1,10 @@
-main = do
-    putStrLn "Hello world, tell me your name:"
-    name <- getLine
-    putStrLn ("Hi " ++ name ++ "!")
+main = do   
+    line <- getLine  
+    if null line  
+        then return ()  
+        else do  
+            putStrLn $ reverseWords line  
+            main  
+  
+reverseWords :: String -> String  
+reverseWords = unwords . map reverse . words  
