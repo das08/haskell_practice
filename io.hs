@@ -1,10 +1,14 @@
-main = do   
-    line <- getLine  
-    if null line  
-        then return ()  
-        else do  
-            putStrLn $ reverseWords line  
-            main  
-  
-reverseWords :: String -> String  
-reverseWords = unwords . map reverse . words  
+-- main = do     
+--     c <- getChar  
+--     if c /= ' '  
+--         then do  
+--             putChar c  
+--             main  
+--         else return ()  
+import Control.Monad
+import Data.Char
+
+main = forever $ do
+    putStr "Enter something: "
+    line <- getLine
+    putStrLn $ map toUpper line
